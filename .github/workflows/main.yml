@@ -24,8 +24,18 @@ jobs:
         run: |
           java -version
           echo $JAVA_HOME
-          which java   
+          which java  
+       # Check secrets
+      - name: Check Sonar Configuration
+        run: |
+          echo "Organization:"
+          echo "${{ secrets.SONAR_ORGANIZATION }}"
 
+          echo "Project Key:"
+          echo "${{ secrets.SONAR_PROJECT_KEY }}"
+
+          echo "Token length:"
+          echo -n "${{ secrets.SONAR_TOKEN }}" | wc -c
     # Run SonarCloud Scan
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v5
